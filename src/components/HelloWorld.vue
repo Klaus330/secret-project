@@ -87,7 +87,7 @@ function enterCode() {
     </div>
 
     <div class="mt-5">
-      <form method="POST" data-netlify="true" name="form">
+      <form method="POST" data-netlify="true">
       <input type="hidden" name="form-name" value="form">
           <input type="hidden" name="data" value="{{JSON.stringify(displayCode)}}">
           <button
