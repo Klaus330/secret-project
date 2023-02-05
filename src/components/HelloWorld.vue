@@ -31,13 +31,35 @@ function enterCode() {
   displayCode.value = vouchers[value];
 }
 
-function claimCode()
+function claimCode(event)
 {
   let redeemedCodes = localStorage.getItem('redeemedCodes') ?? [];
   redeemedCodes.push(code.value.toUpperCase())
   localStorage.setItem('redeemedCodes', JSON.stringify(redeemedCodes))
   claimedPressed.value = true;
-  alert('Thanks for claiming this voucher. I will get in touch with you soon.')
+  // alert('Thanks for claiming this voucher. I will get in touch with you soon.')
+
+
+  function encode(data) {
+      return Object.keys(data)
+        .map(
+          (key) =>
+            encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+        )
+        .join("&");
+    }
+
+    event.preventDefault();
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": event.target.getAttribute("name"),
+        'title': displayCode.value.title
+      }),
+    })
+      .then(() => navigate("/thank-you/"))
+      .catch((error) => alert(error));
 }
 </script>
 
@@ -98,13 +120,12 @@ function claimCode()
     </div>
 
     <div class="mt-5">
-      <form method="POST" data-netlify="true">
+      <form method="POST" data-netlify="true" name="form" @submit.prevent="claimCode($event)">
       <input type="hidden" name="form-name" value="form">
           <input type="hidden" name="data" value="{{JSON.stringify(displayCode)}}">
           <button
-          type="button"
+          type="submit"
           class="w-full bg-indigo-900 rounded text-white py-2 px-2 shadow font-semibold"
-          @click="claimCode()"
           v-show="!claimedPressed"
         >
           Claim voucher
