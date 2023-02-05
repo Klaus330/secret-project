@@ -7,30 +7,33 @@ console.log(codes);
 const code = ref("");
 let displayCode = ref(null);
 let codeError = ref(null);
+let claimedPressed = ref(false);
 
 let hasVoucher = () => {
   return displayCode.value != null;
 };
 
 function enterCode() {
-  if (!codes.includes(code.value)) {
+  let value = code.value.toUpperCase();
+  if (!codes.includes(value)) {
     console.log('asdsad')
     codeError = "Invlaid code"
 
     return;
   }
 
-  if (vouchers[code.value].redeemed) {
+  if (vouchers[value].redeemed) {
     codeError = "Code Expired"
 
     return;
   }
 
-  displayCode.value = vouchers[code.value];
+  displayCode.value = vouchers[value];
 }
 
 function claimCode()
 {
+  claimedPressed.value = true;
   alert('Thanks for claiming this voucher. I will get in touch with you soon.')
 }
 </script>
@@ -99,6 +102,7 @@ function claimCode()
           type="button"
           class="w-full bg-indigo-900 rounded text-white py-2 px-2 shadow font-semibold"
           @click="claimCode()"
+          v-show="!claimedPressed"
         >
           Claim voucher
         </button>
