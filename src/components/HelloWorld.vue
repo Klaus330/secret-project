@@ -58,7 +58,7 @@ function claimCode(event)
         'title': displayCode.value.title
       }),
     })
-      .then(() => navigate("/thank-you/"))
+      .then(() => window.location.href = "/thank-you/")
       .catch((error) => alert(error));
 }
 </script>
