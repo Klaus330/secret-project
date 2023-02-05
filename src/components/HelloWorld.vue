@@ -37,7 +37,6 @@ function claimCode(event)
   redeemedCodes.push(code.value.toUpperCase())
   localStorage.setItem('redeemedCodes', JSON.stringify(redeemedCodes))
   claimedPressed.value = true;
-  // alert('Thanks for claiming this voucher. I will get in touch with you soon.')
 
 
   function encode(data) {
@@ -58,7 +57,7 @@ function claimCode(event)
         'title': displayCode.value.title
       }),
     })
-      .then(() => window.location.href = "/thank-you/")
+      .then(() => alert('Thanks for claiming this voucher. I will get in touch with you soon.'))
       .catch((error) => alert(error));
 }
 </script>
