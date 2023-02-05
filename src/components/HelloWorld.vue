@@ -41,7 +41,7 @@ function claimCode()
 <template>
   <div id="" v-if="!hasVoucher()">
     <div class="pb-5">
-      <h2 class="text-white font-bold text-5xl drop-shadow-xl uppercase">Love Codes</h2>
+      <h2 class="text-white font-bold text-5xl drop-shadow-xl uppercase">Vouchers</h2>
     </div>
     <div
       class="flex items-center justify-between flex-col bg-white rounded px-4 py-6 gap-6 shadow-xl shadow-purple-600"
@@ -76,13 +76,13 @@ function claimCode()
       <div class="border border-black rounded">
         <div class="p-3 border-b border-black">
           <p>
-            ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ 
+            {{ displayCode.emoji }}
           </p>
           <h3 class="font-bold text-xl lg:text-5xl text-red-900 drop-shadow">
             {{ displayCode.title }}
           </h3>
           <p>
-            ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ 
+            {{ displayCode.emoji }}
           </p>
         </div>
         <div class="p-3">
