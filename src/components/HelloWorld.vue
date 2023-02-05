@@ -16,14 +16,14 @@ let hasVoucher = () => {
 function enterCode() {
   let value = code.value.toUpperCase();
   if (!codes.includes(value)) {
-    console.log('asdsad')
-    codeError = "Invlaid code"
+    codeError.value = "Invlaid code"
 
     return;
   }
 
-  if (vouchers[value].redeemed) {
-    codeError = "Code Expired"
+  let redeemedCodes = localStorage.getItem('redeemedCodes') ?? [];
+  if (redeemedCodes.includes(value)) {
+    codeError.value = "Code Expired"
 
     return;
   }
@@ -33,6 +33,9 @@ function enterCode() {
 
 function claimCode()
 {
+  let redeemedCodes = localStorage.getItem('redeemedCodes') ?? [];
+  redeemedCodes.push(code.value.toUpperCase())
+  localStorage.setItem('redeemedCodes', JSON.stringify(redeemedCodes))
   claimedPressed.value = true;
   alert('Thanks for claiming this voucher. I will get in touch with you soon.')
 }
@@ -55,7 +58,7 @@ function claimCode()
           :class="{'border-red-500 placeholder-red-500': codeError}"
           placeholder="Enter CODE"
         />
-        <p class="text-red-500 mt-1" id="code-error" v-show="codeError != null">Invalid Code</p>
+        <p class="text-red-500 mt-1" id="code-error" v-show="codeError != null">{{ codeError }}</p>
       </div>
       <button
         type="button"
