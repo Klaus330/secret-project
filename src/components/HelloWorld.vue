@@ -28,6 +28,11 @@ function enterCode() {
 
   displayCode.value = vouchers[code.value];
 }
+
+function claimCode()
+{
+  alert('Thanks for claiming this voucher. I will get in touch with you soon.')
+}
 </script>
 
 <template>
@@ -91,8 +96,9 @@ function enterCode() {
       <input type="hidden" name="form-name" value="form">
           <input type="hidden" name="data" value="{{JSON.stringify(displayCode)}}">
           <button
-          type="submit"
+          type="button"
           class="w-full bg-indigo-900 rounded text-white py-2 px-2 shadow font-semibold"
+          @click="claimCode()"
         >
           Claim voucher
         </button>
