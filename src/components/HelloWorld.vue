@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import vouchers from "@/contents/code.json";
 const codes = Object.keys(vouchers);
-console.log(codes);
+console.log(vouchers);
 
 const code = ref("");
 let displayCode = ref(null);
@@ -13,7 +13,21 @@ let hasVoucher = () => {
   return displayCode.value != null;
 };
 
+let savedCodes = () => {
+  let redeemedCodes = JSON.parse(localStorage.getItem('redeemedCodes')) ?? [];
+  let redeemed = [];
+  codes.forEach((code) => {
+    if(redeemedCodes.includes(code))
+    {
+      redeemed.push(vouchers[code]);
+    }
+  })
+  console.log(redeemed)
+  return redeemed
+}
+
 function enterCode() {
+  let redeemedCodes = JSON.parse(localStorage.getItem('redeemedCodes')) ?? [];
   let value = code.value.toUpperCase();
   if (!codes.includes(value)) {
     codeError.value = "Invlaid code"
@@ -21,7 +35,6 @@ function enterCode() {
     return;
   }
 
-  let redeemedCodes = localStorage.getItem('redeemedCodes') ?? [];
   if (redeemedCodes.includes(value)) {
     codeError.value = "Code Expired"
 
@@ -33,7 +46,7 @@ function enterCode() {
 
 function claimCode(event)
 {
-  let redeemedCodes = localStorage.getItem('redeemedCodes') ?? [];
+  let redeemedCodes = JSON.parse(localStorage.getItem('redeemedCodes')) ?? [];
   redeemedCodes.push(code.value.toUpperCase())
   localStorage.setItem('redeemedCodes', JSON.stringify(redeemedCodes))
   claimedPressed.value = true;
@@ -88,6 +101,17 @@ function claimCode(event)
       >
         Enter
       </button>
+    </div>
+
+    <div class=" py-3 px-5 mt-5">
+      <h2 class="font-bold text-xl mb-3 p-2 bg-white rounded shadow-xl">Redeemed</h2>
+      <ul>
+        <li v-for="(code, index) in savedCodes()" :key="index" class="p-2 bg-white rounded shadow-xl mb-2">
+            <span href="" class=" flex items-center justify-center">
+              <span>{{ code.title }}</span>
+            </span>
+        </li>
+      </ul>
     </div>
   </div>
 
