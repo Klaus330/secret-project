@@ -88,7 +88,7 @@ function claimCode(event)
           type="text"
           name="code"
           v-model="code"
-          class="rounded py-2 px-3 bg-white border border-2 border-gray-400 outline-none placeholder-gray-600 text-center font-semibold"
+          class="text-black rounded py-2 px-3 bg-white border border-2 border-gray-400 outline-none placeholder-gray-600 text-center font-semibold"
           :class="{'border-red-500 placeholder-red-500': codeError}"
           placeholder="Enter CODE"
         />
@@ -103,7 +103,7 @@ function claimCode(event)
       </button>
     </div>
 
-    <div class=" py-3 px-5 mt-5">
+    <div class=" py-3 px-5 mt-5 text-black">
       <h2 class="font-bold text-xl mb-3 p-2 bg-white rounded shadow-xl">Redeemed</h2>
       <ul>
         <li v-for="(code, index) in savedCodes()" :key="index" class="p-2 bg-white rounded shadow-xl mb-2">

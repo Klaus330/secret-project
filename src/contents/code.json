@@ -19,5 +19,12 @@
         "short_description": "☕ Buna dimineatza la cafelutza!",
         "redeemed": false,
         "emoji": "☕☕☕☕☕☕☕☕☕☕"
+    },
+    "XMASS": {
+        "title": "XMASS GIFT",
+        "description": "Sometimes, life puts you in situations where you don't want to know if you should follow your mind or your ...",
+        "short_description": "Open your present!",
+        "redeemed": false,
+        "emoji": "🎅🎅🎅🎅🎅🎅🎅🎅🎅🎅🎅"
     }
 }
